@@ -1,0 +1,41 @@
+---
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: ferm - RedHat | Install Ferm
+  yum:
+    name: ferm
+    state: installed
+  when: ansible_os_family == "RedHat"
+
+- name: ferm - Debian | Install Ferm
+  apt:
+    name: ferm
+    state: installed
+  when: ansible_os_family == "Debian"
+
+- name: ferm - Ensure service is enabled
+  service:
+    name: ferm
+    enabled: yes
+
+- name: ferm - Generate firewall config
+  template:
+    src: "{{ item }}"
+    dest: "{{ fw_ferm_conf }}"
+    owner: root
+    group: root
+    mode: 0600
+  with_first_found:
+    - "{{ playbook_dir }}/templates/{{ inventory_hostname }}_ferm.conf.j2"
+    - "{{ playbook_dir }}/templates/ferm.conf.j2"
+    - "{{ role_path }}/templates/ferm.conf.j2"
+  notify:
+    - restart ferm
+
+- name: ferm - Re-apply the firewall config (restart ferm service)
+  debug:
+    msg: "Will be restarted by the role handler if needed."
+  changed_when: fw_force_restart is defined and fw_force_restart
+  notify:
+    - restart ferm

@@ -1,0 +1,3 @@
+---
+- include: ferm.yml
+  when: fw is defined and fw == "ferm"
