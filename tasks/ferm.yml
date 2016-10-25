@@ -35,7 +35,9 @@
 
 - name: ferm - Re-apply the firewall config (restart ferm service)
   debug:
-    msg: "Will be restarted by the role handler if needed."
-  changed_when: fw_force_restart is defined and fw_force_restart
+    msg: "Ferm service is going to be restarted by the role handler now.."
+  changed_when: True
+  when: fw_force_restart is defined and fw_force_restart
   notify:
     - restart ferm
+
