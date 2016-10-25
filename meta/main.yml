@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Vadym Agarkov
+  description: Configure firewall for Debian/RedHat based distros.
+
+  license: BSD
+
+  min_ansible_version: 1.2
+
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+  - name: EL
+    versions:
+    - 7
+
+dependencies: []
