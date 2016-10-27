@@ -52,5 +52,5 @@ BSD
 Author Information
 ------------------
 
-The role was created by VA some time ago, refactored in Nov 2016.
+The role was created by VA some time ago, refactored in Oct 2016.
 
