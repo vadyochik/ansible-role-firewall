@@ -1,3 +1,4 @@
 ---
 fw_tool: "ferm"
 fw_force_restart: false
+fw_profile: "ssh_only"

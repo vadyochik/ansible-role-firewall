@@ -18,6 +18,14 @@ The  variables should be configured by the user (default values provided) :
 
 * ``fw_tool``: Select firewall (string, currently only ``ferm`` is supported and is default by chance)
 * ``fw_force_restart``: Re-apply firewall config file even if it will not be changed (boolean, default: ``false``)
+* ``fw_profile``: Select firewall profile/template (string, default: ``ssh_only``)
+
+Firewall profile is searched in the following locations (with first found applied):
+
+    - "{{ playbook_dir }}/templates/{{ inventory_hostname }}_ferm.{{ fw_profile }}.conf.j2"
+    - "{{ playbook_dir }}/templates/ferm.{{ fw_profile }}.conf.j2"
+    - "{{ role_path }}/templates/ferm.{{ fw_profile }}.conf.j2"
+
 
 Dependencies
 ------------
