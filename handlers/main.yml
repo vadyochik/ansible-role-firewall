@@ -1,6 +1,6 @@
 ---
-- name: restart ferm
+- name: reload ferm
   service:
     name: ferm
-    state: restarted
+    state: reloaded
 

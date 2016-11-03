@@ -36,18 +36,18 @@
     - "{{ playbook_dir }}/templates/ferm.{{ fw_profile }}.conf.j2"
     - "{{ role_path }}/templates/ferm.{{ fw_profile }}.conf.j2"
   notify:
-    - restart ferm
+    - reload ferm
   tags:
     - fw_gen
     - fw_apply
 
-- name: ferm - Re-apply the firewall config (unconditionally restart ferm service)
+- name: ferm - Re-apply the firewall config (unconditionally reload ferm service)
   debug:
-    msg: "Ferm service is going to be restarted by the role handler now.."
+    msg: "Ferm service is going to be reloaded by the role handler now.."
   changed_when: True
   when: fw_force_restart is defined and fw_force_restart
   notify:
-    - restart ferm
+    - reload ferm
   tags:
     - fw_apply
 
